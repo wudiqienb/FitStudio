@@ -1,0 +1,12 @@
+{% extends "studio/base.html" %}
+{% block title %}更多{% endblock %}
+{% block content %}<section class="page-heading"><p class="eyebrow">WORKSPACE · 工作室</p><h1>更多管理</h1></section>
+<section class="card menu-card"><div class="card-body"><h2>工作室资料</h2>
+{% if perms.studio.view_coursetype %}<a class="menu-link" href="{% url 'studio:catalog' %}"><span>课程与套餐<small>设置课程类型与课时套餐</small></span><span aria-hidden="true">→</span></a>{% endif %}
+{% if perms.studio.add_purchase %}<a class="menu-link" href="{% url 'studio:purchase_add' %}"><span>登记会员购课<small>增加课时并记录入账流水</small></span><span aria-hidden="true">→</span></a>{% endif %}
+{% if perms.studio.view_coach %}<a class="menu-link" href="{% url 'admin:studio_coach_changelist' %}"><span>教练档案<small>在内部后台管理</small></span><span aria-hidden="true">→</span></a>{% endif %}
+<a class="menu-link" href="{% url 'admin:index' %}"><span>内部管理后台<small>账号权限与后台管理</small></span><span aria-hidden="true">→</span></a>
+</div></section>
+<section class="card mt-3"><div class="card-body"><h2>当前账号</h2><p class="account-name">{{ user.get_username }}</p>
+<form action="{% url 'admin:logout' %}" method="post">{% csrf_token %}<button class="btn btn-outline-secondary" type="submit">退出登录</button></form>
+</div></section>{% endblock %}

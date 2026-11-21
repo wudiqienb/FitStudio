@@ -1,0 +1,7 @@
+<section class="card card-body mb-3">
+<h2>{{ member.name }}</h2><p>联系电话：{{ member.phone|default:'未填写' }} · 当前状态：{{ member.get_status_display }}</p>
+<p>购课记录：{{ purchase_count }} 笔</p>
+{% for item in balances %}<p>{{ item.course.name }}：余额 {{ item.balance }} 课时</p>{% empty %}<p>暂无课时记录</p>{% endfor %}
+<h3>待处理或未来预约</h3>
+{% for booking in attention_bookings %}<p>{{ booking.starts_at|date:'Y-m-d H:i' }} · {{ booking.course_name }} · {{ booking.get_status_display }}</p>{% empty %}<p>无</p>{% endfor %}
+</section>

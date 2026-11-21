@@ -1,0 +1,7 @@
+{% extends "studio/base.html" %}{% block title %}课程与套餐{% endblock %}
+{% block content %}
+<section class="page-heading"><p class="eyebrow">COURSES & PACKAGES</p><h1>课程与课时套餐</h1><p class="text-secondary">不同课程分开记账，同类课时合并使用。</p></section>
+<div class="d-flex flex-wrap gap-2 mb-4">{% if perms.studio.add_coursetype %}<a class="btn btn-primary" href="{% url 'studio:course_add' %}">新增课程类型</a>{% endif %}{% if perms.studio.add_package %}<a class="btn btn-outline-primary" href="{% url 'studio:package_add' %}">新增套餐</a>{% endif %}{% if perms.studio.add_purchase %}<a class="btn btn-outline-primary" href="{% url 'studio:purchase_add' %}">登记购课</a>{% endif %}</div>
+<h2>课程类型</h2><div class="row g-3 mb-4">{% for course in course_types %}<article class="col-12 col-md-6"><div class="card h-100"><div class="card-body"><h3>{{ course.name }}</h3><p class="mb-0">默认 {{ course.duration_minutes }} 分钟 · 每次 {{ course.credits_cost }} 课时 · {% if course.active %}启用{% else %}停用{% endif %}</p></div></div></article>{% empty %}<p>还没有课程，请先新增课程类型。</p>{% endfor %}</div>
+<h2>课时套餐</h2>{% if can_view_packages %}<div class="row g-3">{% for package in packages %}<article class="col-12 col-md-6"><div class="card h-100"><div class="card-body"><h3>{{ package.name }}</h3><p>{{ package.course_type }} · {{ package.credits }}课时</p><strong>¥{{ package.price }}</strong> · {% if package.active %}启用{% else %}停用{% endif %}</div></div></article>{% empty %}<p>还没有套餐，请先新增课时套餐。</p>{% endfor %}</div>{% else %}<p>请联系管理员开通套餐查看权限。</p>{% endif %}
+{% endblock %}

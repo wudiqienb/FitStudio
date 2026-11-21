@@ -1,0 +1,13 @@
+flowchart TB
+    B["Local browser or configured public client"] -->|HTTPS via published proxy port| P["proxy · Caddy"]
+    P -->|HTTP to web:8000| W["web · Gunicorn + Django · UID/GID 10001"]
+    P --- CF["Read-only Caddyfile bind"]
+    P --- PD[("caddy_data · TLS state")]
+    P --- PC[("caddy_config")]
+    W --- V[("studio_data · /data/fitstudio.sqlite3")]
+    W --- S["WhiteNoise · /app/staticfiles baked into image"]
+    I["Web entrypoint · migrate --noinput"] --> V
+    I -->|Only after successful migration| W
+    H["Container healthcheck"] -->|127.0.0.1:8000| E["/healthz/"]
+    E --> V
+    E -.->|Web healthy allows proxy startup| P

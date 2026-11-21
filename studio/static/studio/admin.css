@@ -1,0 +1,61 @@
+/* 叠加于 Django 自带 responsive.css，避免引入 Bootstrap 全局重置。 */
+.fitstudio-nav { flex: 0 1 100%; width: 100%; max-width: 100%; min-width: 0;
+  box-sizing: border-box; margin-top: 12px; padding: 0; }
+.fitstudio-nav .row { margin-inline: 0; }
+.fitstudio-nav a { display: flex; align-items: center; min-height: 44px; padding: 0 12px;
+  border: 1px solid var(--header-link-color); border-radius: 6px; box-sizing: border-box; }
+#header { flex-wrap: wrap; }
+body.app-studio #content, .changelist-form-container { min-width: 0; }
+body.app-studio .field-specialty { overflow-wrap: anywhere; }
+
+@media (max-width: 1024px) {
+  #header { flex-wrap: nowrap; }
+  .fitstudio-nav { flex: 0 0 auto; align-self: stretch; }
+  body.app-studio #changelist { flex-direction: column; }
+  body.app-studio #changelist-filter { position: static; width: auto; margin: 20px 0 0; }
+  body.app-studio .form-row input:not([type=checkbox]),
+  body.app-studio .form-row select, body.app-studio .form-row textarea {
+    box-sizing: border-box; max-width: 100%; min-height: 44px; font-size: 16px;
+  }
+  body.app-studio .aligned .form-row > div { max-width: 100%; }
+  body.app-studio .submit-row input, body.app-studio .submit-row a,
+  body.app-studio .object-tools a, body.app-studio #toolbar input,
+  body.app-studio #changelist .actions select, body.app-studio #changelist .actions button {
+    box-sizing: border-box; min-height: 44px;
+  }
+  body.app-studio .submit-row a, body.app-studio .object-tools a {
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  body.app-studio #toolbar form > div { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  body.app-studio #toolbar #searchbar { flex: 1 1 160px; width: 0; min-width: 0; font-size: 16px; }
+  body.app-studio #changelist-filter a { display: inline-block; padding-block: 10px; }
+  body.app-studio #changelist .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  body.app-studio #changelist .actions label { min-width: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  body.app-studio #changelist .actions select { max-width: 100%; min-width: 0; }
+  body.app-studio #changelist .results { overflow: visible; }
+  body.app-studio #result_list.fitstudio-cards { display: block; width: 100%; }
+  body.app-studio #result_list.fitstudio-cards thead,
+  body.app-studio #result_list.fitstudio-cards tbody { display: block; }
+  body.app-studio #result_list.fitstudio-cards thead tr { display: flex; flex-wrap: wrap; gap: 4px; }
+  body.app-studio #result_list.fitstudio-cards thead th { width: auto; border: 0; }
+  body.app-studio #result_list.fitstudio-cards thead th .text a { min-height: 44px; display: flex; align-items: center; }
+  body.app-studio #result_list.fitstudio-cards tbody tr {
+    display: block; margin: 12px 0; border: 1px solid var(--hairline-color); border-radius: 8px;
+  }
+  body.app-studio #result_list.fitstudio-cards tbody td,
+  body.app-studio #result_list.fitstudio-cards tbody th {
+    display: flex; gap: 12px; align-items: center; justify-content: space-between;
+    width: auto; min-height: 44px; box-sizing: border-box; white-space: normal;
+    overflow-wrap: anywhere; text-align: right;
+  }
+  body.app-studio #result_list.fitstudio-cards tbody [data-label]::before {
+    content: attr(data-label); flex: 0 0 5em; text-align: left; color: var(--body-quiet-color);
+  }
+  body.app-studio #result_list.fitstudio-cards tbody a { display: inline-flex; align-items: center; min-height: 44px; }
+  body.app-studio input.action-select, body.app-studio #action-toggle { width: 24px; height: 24px; margin: 10px; }
+  body.app-studio .paginator { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+  body.app-studio .paginator a { display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; }
+  body.login #container { width: auto; max-width: 480px; box-sizing: border-box; }
+  body.login .form-row input { box-sizing: border-box; min-height: 44px; font-size: 16px; }
+  body.login .submit-row input { min-height: 44px; }
+}

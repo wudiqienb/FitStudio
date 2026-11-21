@@ -1,0 +1,10 @@
+{% extends 'studio/base.html' %}
+{% block title %}归档会员历史{% endblock %}
+{% block content %}<h1>归档会员历史</h1>{% include 'studio/archive_summary.html' %}
+<a class="btn btn-primary" href="{% url 'studio:member_restore' member.pk %}">恢复会员</a>
+<a class="btn btn-link" href="{% url 'studio:archived_members' %}">返回归档列表</a>
+<h2>归档操作记录</h2>{% for event in events %}<p>{{ event.created_at|date:'Y-m-d H:i:s' }} · {{ event.get_action_display }} · {{ event.created_by.get_username }} · {{ event.reason }}</p>{% endfor %}
+<h2>购课历史</h2>{% for purchase in purchases %}<p>{{ purchase.purchased_on }} · {{ purchase.package_name }} · {{ purchase.course_type.name }} · {{ purchase.credits }} 课时 · {{ purchase.amount }} 元</p>{% empty %}<p>无</p>{% endfor %}
+<h2>课时流水</h2>{% for entry in entries %}<p>{{ entry.created_at|date:'Y-m-d H:i' }} · {{ entry.course_type.name }} · {{ entry.get_kind_display }} · {{ entry.delta }} · 余额 {{ entry.balance_after }} · {{ entry.reason }}</p>{% empty %}<p>无</p>{% endfor %}
+<h2>预约历史</h2>{% for booking in bookings %}<p>{{ booking.starts_at|date:'Y-m-d H:i' }} · {{ booking.course_name }} · {{ booking.coach.name }} · {{ booking.get_status_display }}</p>{% empty %}<p>无</p>{% endfor %}
+{% endblock %}

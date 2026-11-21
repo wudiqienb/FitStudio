@@ -1,0 +1,20 @@
+{% extends "studio/base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'studio:courses' %}">← 返回课程</a>
+<section class="page-heading"><p class="eyebrow">STUDIO · 课务管理</p><h1>{{ page_title }}</h1><p class="text-secondary">{{ intro }}</p></section>
+<div data-fi-result>
+{% if booking %}<div class="card mb-3"><div class="card-body"><h2>{{ booking.member }} · {{ booking.course_name }}</h2><p class="mb-0">{{ booking.coach }} · {{ booking.starts_at|date:"Y.m.d H:i" }} · {{ booking.credits_cost }}课时 · {{ booking.get_status_display }}</p></div></div>{% endif %}
+</div>
+<form method="post" class="card profile-form" {% if coach_interaction %}data-fi-coach-form{% if cautious_interaction %} data-fi-cautious{% endif %}{% endif %} novalidate>{% csrf_token %}<div class="card-body">
+  {% for hidden in form.hidden_fields %}{{ hidden }}{% if hidden.errors %}<div class="alert alert-danger" role="alert">请求编号无效，请刷新页面。</div>{% endif %}{% endfor %}
+  {% if form.non_field_errors %}<div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+  <div class="row g-3">{% for field in form.visible_fields %}<div class="col-12 col-md-6">
+    {% if field.field.widget.input_type == 'checkbox' %}<div class="form-check confirm-check">{{ field }}<label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+    {% else %}<label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}{% if not field.field.required %}<span class="optional">选填</span>{% endif %}</label>{{ field }}{% endif %}
+    {% if field.help_text %}<p class="form-text mb-0">{{ field.help_text }}</p>{% endif %}
+    {% if field.errors %}<div class="field-errors" id="{{ field.auto_id }}_error" role="alert">{{ field.errors }}</div>{% endif %}
+  </div>{% endfor %}</div>
+  <div class="form-actions">{% if can_submit != False %}<button class="btn btn-primary" {% if coach_interaction %}data-fi-button{% if cautious_interaction %} data-fi-neutral{% endif %}{% endif %} type="submit">{{ submit_label|default:"保存" }}</button>{% endif %}<a class="btn btn-outline-secondary" href="{% url 'studio:courses' %}">返回</a></div>
+</div></form>
+{% endblock %}

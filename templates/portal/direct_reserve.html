@@ -1,0 +1,8 @@
+{% extends 'portal/base.html' %}{% block title %}自主预约{% endblock %}{% block content %}
+<h1>{% if booking %}自主改期{% else %}自主预约{% endif %}</h1>
+<p>周一至周六 10:00—22:00 · 星期日休息{% if days %} · 最多提前{{ days }}天{% endif %}</p>
+{% if account %}<p>账面余额 {{ account.balance }} 节 · 可用 {{ account.available }} 节</p>{% endif %}
+{% if error %}<p role="alert">{{ error }}</p>{% endif %}
+<form method="get" class="portal-card section-card"><label for="day">选择日期</label><input class="portal-input" id="day" name="day" type="date" value="{{ day|date:'Y-m-d' }}" required><button class="primary-button" type="submit">查看可预约时间</button></form>
+{% if options %}<form method="post" class="portal-card section-card">{% csrf_token %}<input type="hidden" name="day" value="{{ day|date:'Y-m-d' }}"><label for="start-time">选择开始时间（显示结束时间）</label><select class="portal-input" name="start_time" id="start-time" required><option value="">请选择</option>{% for start,end in options %}<option value="{{ start }}">{{ start }} — {{ end }}</option>{% endfor %}</select><p>预约只占用课时，不立即扣课。</p><button class="primary-button" type="submit">核对{% if booking %}改期{% else %}预约{% endif %}</button></form>{% else %}<p>该日期暂无可预约时间，请选择其他日期或联系工作室。</p>{% endif %}
+{% if form.errors %}<div role="alert">{{ form.errors }}</div>{% endif %}<a class="back-link" href="{% url 'studio:portal_home' %}">← 返回会员首页</a>{% endblock %}

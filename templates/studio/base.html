@@ -1,0 +1,33 @@
+{% load static %}<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="referrer" content="same-origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block title %}FitStudio{% endblock %} · 工作室</title>
+  <link rel="stylesheet" href="{% static 'studio/vendor/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'studio/mobile.css' %}">
+  <link rel="stylesheet" href="{% static 'studio/interaction.css' %}">
+  <script src="{% static 'studio/interaction.js' %}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <header class="app-header">
+    <a class="brand" href="{% url 'studio:home' %}"><span class="brand-mark" aria-hidden="true">F</span> FitStudio</a>
+    <span class="header-caption">工作室日常管理</span>
+  </header>
+  <main id="main-content" class="container app-content">
+    {% include 'shared/feedback.html' %}
+    {% if request.resolver_match.url_name == 'quick_open' or request.resolver_match.url_name == 'quick_renew' or request.resolver_match.url_name == 'member_credentials_reset' %}<nav class="mb-3" aria-label="会员业务快捷导航"><a href="{% url 'studio:home' %}">← 返回工作台</a> · {% if perms.studio.quick_open_member %}<a href="{% url 'studio:quick_open' %}">快速新增会员</a>{% endif %} {% if perms.studio.quick_renew_member %}<a href="{% url 'studio:quick_renew' %}">老会员续课</a>{% endif %}</nav>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <nav class="bottom-nav" aria-label="主导航">
+    {% with page=request.resolver_match.url_name %}
+    <a href="{% url 'studio:home' %}" {% if page == 'home' %}aria-current="page"{% endif %}><span aria-hidden="true">⌂</span>首页</a>
+    <a href="{% url 'studio:courses' %}" {% if page == 'courses' or 'booking' in page or page == 'catalog' or page == 'course_add' or page == 'package_add' %}aria-current="page"{% endif %}><span aria-hidden="true">▤</span>课程</a>
+    <a href="{% url 'studio:members' %}" {% if page == 'members' or 'member' in page or page == 'purchase_add' or page == 'adjustment_add' or page == 'quick_open' or page == 'quick_renew' %}aria-current="page"{% endif %}><span aria-hidden="true">♧</span>会员</a>
+    <a href="{% url 'studio:more' %}" {% if page == 'more' %}aria-current="page"{% endif %}><span aria-hidden="true">···</span>更多</a>
+    {% endwith %}
+  </nav>
+</body>
+</html>

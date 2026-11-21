@@ -1,0 +1,10 @@
+{
+    admin off
+    log {
+        exclude http.log.access http.log.error
+    }
+}
+
+{$FITSTUDIO_DOMAIN} {
+    reverse_proxy web:8000
+}

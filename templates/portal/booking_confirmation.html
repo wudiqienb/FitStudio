@@ -1,0 +1,9 @@
+{% extends 'portal/base.html' %}{% block title %}确认预约{% endblock %}{% block content %}
+<div class="confirm-overlay"><section class="portal-card confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-confirm-title">
+<p class="eyebrow">PLEASE CONFIRM</p><h2 id="booking-confirm-title">确认预约课程</h2>
+<p><strong>{{ slot.course_type.name }}</strong><br>教练：{{ slot.coach.name }}<br>上课日期：{{ slot.starts_at|date:'Y年m月d日' }}<br>开始时间：{{ slot.starts_at|date:'Y年m月d日 H:i' }}<br>结束时间：{{ ends_at|date:'Y年m月d日 H:i' }}<br>本次占用：1 节课时</p>
+<p class="rule-text">预约成功后占用1节可用课时，不立即扣除实际余额。正常取消会释放占用课时；完成、迟取消及爽约按现有规则扣课。</p>
+<div class="fi-skeleton" data-fi-pending hidden role="status" aria-label="正在处理预约"></div>
+<form data-fi-portal-form method="post" action="{% url 'studio:portal_book_slot' slot.pk %}">{% csrf_token %}<input type="hidden" name="request_id" value="{{ request_id }}"><input type="hidden" name="expected_slot" value="{{ stamp }}"><input type="hidden" name="confirmation_token" value="{{ confirmation_token }}"><button data-fi-button data-fi-contract-on-success class="primary-button" type="submit">确认预约 <span aria-hidden="true">↗</span></button></form><div data-fi-portal-result>{% include 'portal/credits.html' %}</div>
+<a class="secondary-button" href="{% url 'studio:portal_courses' %}">再想想</a>
+</section></div>{% endblock %}

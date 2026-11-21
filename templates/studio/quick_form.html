@@ -1,0 +1,19 @@
+{% extends "studio/quick_base.html" %}
+{% block content %}
+<h1>{% if opening %}快速新增会员{% else %}老会员续课{% endif %}</h1>
+{% if page_error %}<p role="alert">{{ page_error }}</p>{% endif %}
+<p>私教课 · 课时与实际收款金额独立填写，金额不会自动计算。</p>
+{% if not opening %}
+<form method="get"><label for="search">搜索会员姓名或联系电话</label><input class="form-control" id="search" name="q" value="{{ query }}" maxlength="80"><button class="btn btn-outline-primary mt-2">搜索</button></form>
+{% for item in members %}<p>{{ item.name }} · {{ item.phone }} · {{ item.get_status_display }} <a href="?member={{ item.pk }}">选择此会员</a></p>{% empty %}{% if query %}<p>未找到匹配会员。</p>{% endif %}{% endfor %}
+{% if member %}<section><h2>已选择：{{ member.name }}</h2><p>联系电话：{{ member.phone }} · {{ member.get_status_display }}</p><p>当前课时余额：{{ balance|default_if_none:"无法读取" }}</p></section>{% endif %}
+{% endif %}
+{% if opening or member %}
+<form method="post" class="card card-body">{% csrf_token %}{{ form.non_field_errors }}
+{% for field in form %}{% if field.is_hidden %}{{ field }}{% else %}<p>{{ field.label_tag }} {{ field }} {{ field.errors }}</p>{% endif %}{% endfor %}
+<p>常用课时：{% for n in presets %}<button class="btn btn-outline-primary me-2 mb-2" type="button" data-credits="{{ n }}">{{ n }}课时</button>{% endfor %}也可直接输入自定义整数。</p>
+<button class="btn btn-primary" type="submit">{% if opening %}确认开通并购课{% else %}确认续课{% endif %}</button>
+</form>
+{% else %}{{ form.non_field_errors }}{% endif %}
+<script>document.querySelectorAll('[data-credits]').forEach(function(b){b.addEventListener('click',function(){document.getElementById('id_credits').value=b.dataset.credits;});});</script>
+{% endblock %}

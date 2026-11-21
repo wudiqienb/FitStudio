@@ -1,0 +1,29 @@
+/* Interaction 2.0: additive tokens; existing layout remains authoritative. */
+:root{--fi-brand:#183a32;--fi-accent:#b9d85b;--fi-bg:#f3f5ef;--fi-surface:#fff;--fi-success:#246444;--fi-warning:#805900;--fi-danger:#a33232;--fi-info:#285e78;--fi-card-radius:22px;--fi-button-radius:12px;--fi-shadow:0 8px 25px #183a320a;--fi-space:16px;--fi-touch:48px;--fi-press:100ms;--fi-contract:220ms;--fi-check:260ms;--fi-particle:400ms;--fi-ease:cubic-bezier(.2,.8,.2,1)}
+body{background:var(--fi-bg)}
+.fi-button{position:relative;display:inline-grid;place-items:center;min-height:var(--fi-touch);border:0;border-radius:var(--fi-button-radius);padding:12px 24px;background:var(--fi-brand);color:#fff;font:inherit;cursor:pointer;transition:transform var(--fi-press) var(--fi-ease);isolation:isolate}
+.fi-button:focus-visible,.fi-toast button:focus-visible{outline:3px solid var(--fi-accent);outline-offset:4px}
+.fi-button:active,.fi-button[data-state=pressed]{transform:scale(.97)}
+.fi-button::before{content:"";position:absolute;inset:0;background:var(--fi-brand);border-radius:inherit;z-index:-1;transition:clip-path var(--fi-contract) var(--fi-ease),border-radius var(--fi-contract) var(--fi-ease)}
+.fi-button[data-state=loading],.fi-button[data-state=success]{background:transparent;cursor:wait}
+.fi-button[data-state=loading]::before,.fi-button[data-state=success]::before{clip-path:inset(0 calc(50% - 24px) round 24px);border-radius:24px}
+.fi-button[data-state=success]::before{background:var(--fi-success)}
+.fi-label{transition:opacity 100ms}
+.fi-button[data-state=loading] .fi-label,.fi-button[data-state=success] .fi-label{opacity:0}
+.fi-indicator{position:absolute;width:24px;height:24px;display:none}
+.fi-button[data-state=loading] .fi-spinner{display:block;border:2px solid #ffffff55;border-top-color:#fff;border-radius:50%;animation:fi-spin .8s linear infinite}
+.fi-button[data-state=success] .fi-check{display:grid;place-items:center;color:#fff;font:700 22px/1 system-ui,sans-serif;animation:fi-check-in var(--fi-check) var(--fi-ease)}
+.fi-button[data-state=error]{outline:2px solid var(--fi-danger)}
+.fi-particle{position:absolute;left:50%;top:50%;width:4px;height:4px;border-radius:50%;background:var(--fi-accent);pointer-events:none;animation:fi-burst var(--fi-particle) ease-out forwards}
+.fi-toasts{position:fixed;right:max(16px,env(safe-area-inset-right));top:max(16px,env(safe-area-inset-top));width:min(380px,calc(100% - 32px));z-index:1100;pointer-events:none}
+.fi-toast{display:flex;gap:12px;align-items:center;margin-bottom:10px;padding:14px 16px;border:1px solid #dce4db;border-left:4px solid var(--fi-info);border-radius:12px;background:#fff;color:var(--fi-brand);box-shadow:var(--fi-shadow);overflow-wrap:anywhere;pointer-events:auto;animation:fi-enter 220ms var(--fi-ease)}
+.fi-toast[data-level=success]{border-left-color:var(--fi-success)}.fi-toast[data-level=error]{border-left-color:var(--fi-danger)}.fi-toast[data-level=warning]{border-left-color:var(--fi-warning)}
+.fi-toast button{margin-left:auto;min-width:44px;min-height:44px;flex-shrink:0;border:0;background:transparent;color:inherit;font-size:20px;cursor:pointer}
+.fi-feedback{font-size:14px;line-height:1.7;color:var(--fi-danger);overflow-wrap:anywhere}
+.fi-skeleton{height:18px;border-radius:8px;background:#e3e9df;animation:fi-pulse 1.4s ease-in-out infinite}
+.fi-empty{padding:var(--fi-space);border:1px dashed #b7c6b5;border-radius:var(--fi-card-radius);color:var(--fi-brand)}
+.fi-card-update{animation:fi-enter 220ms var(--fi-ease)}
+@keyframes fi-spin{to{transform:rotate(360deg)}}@keyframes fi-check-in{from{opacity:0;transform:scale(.75)}to{opacity:1;transform:scale(1)}}@keyframes fi-burst{from{transform:translate(-50%,-50%);opacity:.8}to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy)));opacity:0}}@keyframes fi-enter{from{transform:translateY(6px);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes fi-pulse{50%{opacity:.45}}
+@media(prefers-reduced-motion:reduce){.fi-button,.fi-button::before,.fi-label{transition:none}.fi-indicator,.fi-toast,.fi-skeleton,.fi-card-update{animation:none!important}.fi-particle{display:none}}
+
+.fi-feedback[data-level=success]{color:var(--fi-success)}

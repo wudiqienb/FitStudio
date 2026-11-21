@@ -1,0 +1,209 @@
+# 公开文件白名单 · Release manifest
+
+本清单共列出 190 个路径，含本文件。范围为源码、必要文档和八张已批准的合成截图。每次出包前应与这一清单逐项比对。许可范围见 [内容许可](docs/CONTENT-LICENSE.md) 和 [第三方声明](docs/THIRD-PARTY-NOTICES.md)。
+
+| 路径 | 来源 | 许可证 | 状态 | 备注 |
+| --- | --- | --- | --- | --- |
+| `.dockerignore` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `.env.example` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `.gitignore` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `CHANGELOG.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `CODE_OF_CONDUCT.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `CONTRIBUTING.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `Dockerfile` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `LICENSE` | 项目原创 | MIT | 已处理 | 标准正文，授权原创软件代码 |
+| `README.en.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `README.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `RELEASE-MANIFEST.md` | 项目原创 | 保留权利 | 已处理 | 本清单 |
+| `ROADMAP.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `SECURITY.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `config/__init__.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/asgi.py` | 第三方／项目原创 | BSD-3-Clause／MIT | 已处理 | 上游脚手架与项目增补，见第三方声明 |
+| `config/check_health.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/deployment_settings.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/dev_settings.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/gunicorn.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/health.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/production_settings.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/reporting.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/settings.py` | 第三方／项目原创 | BSD-3-Clause／MIT | 已处理 | 上游脚手架与项目增补，见第三方声明 |
+| `config/test_settings.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `config/urls.py` | 第三方／项目原创 | BSD-3-Clause／MIT | 已处理 | 上游脚手架与项目增补，见第三方声明 |
+| `config/wsgi.py` | 第三方／项目原创 | BSD-3-Clause／MIT | 已处理 | 上游脚手架与项目增补，见第三方声明 |
+| `deploy/Caddyfile` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `deploy/Caddyfile.local` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `deploy/entrypoint.sh` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `docker-compose.yml` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `docs/CONTENT-LICENSE.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/PROJECT-AUTHORSHIP.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/THIRD-PARTY-NOTICES.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/architecture/business-flows/01-member-onboarding.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/business-flows/02-renewal.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/business-flows/03-self-booking.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/business-flows/04-normal-cancellation.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/business-flows/05-late-cancel-no-show.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/business-flows/06-coach-cancel-makeup.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/business-flows/07-deduction-reversal.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/business-flows/README.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/database-er.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/database-er.mmd` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/deployment-architecture.mmd` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/system-architecture.md` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/architecture/system-architecture.mmd` | 项目原创 | 保留权利 | 已批准 | 按审查记录保留 |
+| `docs/deployment.en.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/deployment.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/engineering/README.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/engineering/adr/0001-sqlite-single-instance.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/engineering/phase2-public-summary.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/engineering/phase3-public-summary.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/github-presentation.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/licenses/Django-Admin-Icons-MIT.txt` | 第三方 | MIT（Code Charm Ltd） | 已处理 | 上游许可全文 |
+| `docs/licenses/Django-BSD-3-Clause.txt` | 第三方 | BSD-3-Clause | 已处理 | 上游许可全文 |
+| `docs/screenshots/README.md` | 项目原创 | 保留权利 | 已处理 | 候选整理 |
+| `docs/screenshots/admin.png` | 项目原创／第三方图标 | 保留权利／MIT（图标） | 已处理 | 已批准的原始合成截图，字节一致，附图标声明 |
+| `docs/screenshots/coach-dashboard.png` | 项目原创 | 保留权利 | 已批准 | 已批准的原始合成截图，字节一致 |
+| `docs/screenshots/member-booking.png` | 项目原创 | 保留权利 | 已批准 | 已批准的原始合成截图，字节一致 |
+| `docs/screenshots/member-bookings.png` | 项目原创 | 保留权利 | 已批准 | 已批准的原始合成截图，字节一致 |
+| `docs/screenshots/member-home.png` | 项目原创 | 保留权利 | 已批准 | 已批准的原始合成截图，字节一致 |
+| `docs/screenshots/member-management.png` | 项目原创 | 保留权利 | 已批准 | 已批准的原始合成截图，字节一致 |
+| `docs/screenshots/quick-open.png` | 项目原创 | 保留权利 | 已批准 | 已批准的原始合成截图，字节一致 |
+| `docs/screenshots/quick-renew.png` | 项目原创 | 保留权利 | 已批准 | 已批准的原始合成截图，字节一致 |
+| `manage.py` | 第三方／项目原创 | BSD-3-Clause／MIT | 已处理 | 上游脚手架与项目增补，见第三方声明 |
+| `requirements-production.txt` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `requirements.txt` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/__init__.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/admin.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/apps.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/archive_services.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/archive_urls.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/archive_views.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/balance_views.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/booking_v2.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/booking_v2_views.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/coach_roles.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/credential_middleware.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/credential_models.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/credential_services.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/credential_urls.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/credential_views.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/forms.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/lesson_forms.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/lesson_views.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/management/__init__.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/management/commands/__init__.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/management/commands/bootstrap_admin.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/management/commands/configure_daily_coach.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/0001_initial.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/0002_booking_bookingevent_coursetype_booking_course_type_and_more.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/0003_alter_booking_options_and_more.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/0004_lessonadjustment_and_more.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/0005_memberaccount.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/0006_memberruleconfirmation_availableslot_booking_slot_and_more.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/0007_alter_member_options_memberphoneidentity_and_more.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/0008_credentialstate_memberarchiveevent_and_more.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/migrations/__init__.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/models.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/portal_access.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/portal_feedback.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/portal_forms.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/portal_rules.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/portal_services.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/portal_views.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/quick_services.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/quick_views.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/services.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/static/studio/admin.css` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/static/studio/admin.js` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/static/studio/interaction.css` | 项目原创 | MIT | 已处理 | 原生字符成功标记，不含旧 SVG 路径 |
+| `studio/static/studio/interaction.js` | 项目原创 | MIT | 已处理 | 原生字符成功标记，不含旧 SVG 路径 |
+| `studio/static/studio/mobile.css` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/static/studio/portal-interaction.js` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/static/studio/portal.css` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/static/studio/vendor/LICENSE.bootstrap.txt` | 第三方 | MIT（Bootstrap） | 已批准 | 上游原文件，字节一致 |
+| `studio/static/studio/vendor/bootstrap-grid.min.css` | 第三方 | MIT（Bootstrap） | 已批准 | 上游原文件，字节一致 |
+| `studio/static/studio/vendor/bootstrap.min.css` | 第三方 | MIT（Bootstrap） | 已批准 | 上游原文件，字节一致 |
+| `studio/tests/__init__.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_admin.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_archive.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_booking_confirmation.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_booking_v2.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_bookings.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_coach_signup.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_concurrency.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_credentials.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_deployment.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_interaction.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_interaction_round2.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_interaction_round3.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_interaction_round4.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_lesson_pages.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_lessons.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_m4_pages.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_m4_rules.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_m5_confirmed_rules.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_mobile.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_models.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_phase2_migration.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_portal_auth.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_portal_migrations.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_portal_phase2.py` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/tests/test_quick.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_repair_boundaries.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_repair_workbench.py` | 合成测试 | MIT | 已处理 | 仅改合成测试字面量 |
+| `studio/tests/test_transport.cjs` | 合成测试 | MIT | 已批准 | 保留测试及断言 |
+| `studio/urls.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `studio/views.py` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/admin/base_site.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/base.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/booking_confirmation.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/booking_detail.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/bookings.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/change_password.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/confirm.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/courses.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/credits.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/direct_confirmation.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/direct_reserve.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/home.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/interaction_result.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/login.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/portal/session_card.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/shared/feedback.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/archive_confirm.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/archive_detail.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/archive_list.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/archive_member_actions.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/archive_summary.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/base.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/booking_card.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/booking_detail.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/catalog.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/courses.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/home.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/interaction_result.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/lesson_form.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/member_account_form.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/member_balance.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/member_confirm_delete.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/member_form.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/member_lessons.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/member_list.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/more.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/quick_base.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/quick_form.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/quick_home.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/quick_reset.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+| `templates/studio/quick_result.html` | 项目原创 | MIT | 已批准 | 按审查记录保留 |
+
+## 排除清单
+
+| 范围 | 原因 |
+| --- | --- |
+| `work/` 及工具、浏览器缓存、临时脚本、运行产物 | 本机工作数据，与源码候选分离 |
+| Phase 1 七份内部报告 | 历史环境与审计证据仅内部保留 |
+| Phase 2.5 Docker 原始报告 | 原运行详情留存内部，公开工程摘要保留验证范围和结果 |
+| Phase 2 和 Phase 3 原工程记录十份 | 必要事实由公开摘要提供，安装和架构仍见独立公开指南 |
+| Phase 4A 审查、所有者决策及 Phase 4B 内部整备报告 | 内部授权与审计证据 |
+| 本机数据库及备份、实际 `.env`、密钥和真实数据、Git 元数据、生成的镜像和静态文件 | 源码发布范围外；`.env.example` 是空密钥配置示例 |
+
+发布候选以此白名单为准。

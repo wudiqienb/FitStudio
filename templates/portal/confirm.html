@@ -1,0 +1,12 @@
+{% extends 'portal/base.html' %}{% block title %}确认操作{% endblock %}{% block content %}
+<div class="confirm-overlay"><section class="portal-card confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+<p class="eyebrow">PLEASE CONFIRM</p><h2 id="confirm-title">{% if action == 'cancel' %}确认取消预约{% else %}确认改期{% endif %}</h2>
+<p data-fi-booking-summary>{{ booking.course_name }} · {{ booking.coach.name }}<br>{{ booking.starts_at|date:'Y年m月d日 H:i' }}</p>
+{% if action == 'cancel' %}<p class="outcome" data-fi-outcome>{% if outcome == 'normal' %}本次取消不扣课时{% elif outcome == 'late' %}本次取消将扣除1课时{% else %}课程已开始，无法自主取消{% endif %}</p>{% endif %}
+<p class="rule-text" data-fi-rule>{{ rule.text }}</p>{% if error %}<div class="form-error" role="alert">{{ error }}</div>{% endif %}
+<div class="fi-skeleton" data-fi-pending hidden role="status" aria-label="正在处理操作"></div>
+<form data-fi-portal-form method="post">{% csrf_token %}{{ form.request_id }}{{ form.rule_version }}{{ form.expected_starts_at }}{% if action == 'cancel' %}{{ form.expected_outcome }}{% else %}
+<label for="id_slot_selection">选择新的预约时间</label><select class="portal-input" name="slot_selection" id="id_slot_selection" required><option value="">请选择</option>{% for option in options %}<option value="{{ option.value }}" {% if form.slot_selection.value == option.value %}selected{% endif %}>{{ option.slot.starts_at|date:'Y年m月d日 H:i' }} · {{ option.slot.duration_minutes }}分钟</option>{% endfor %}</select>{% if not options %}<p class="account-note">暂无可用时段，请联系教练。</p>{% endif %}{% endif %}
+{% if form.errors %}<div class="field-error" role="alert">请完整选择时间并勾选确认规则。</div>{% endif %}
+<label class="confirm-checkbox">{{ form.confirmed }} 我已阅读并同意以上规则</label><button data-fi-button data-fi-neutral class="primary-button" type="submit">{% if action == 'cancel' %}确认取消{% else %}确认改期{% endif %}<span>↗</span></button></form><div data-fi-portal-result>{% include 'portal/credits.html' %}</div>
+<a class="back-link" href="{% url 'studio:portal_booking_detail' booking.pk %}">返回预约详情</a></section></div>{% endblock %}

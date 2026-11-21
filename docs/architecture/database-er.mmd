@@ -1,0 +1,214 @@
+erDiagram
+    USER }o--o{ GROUP : member_of
+    GROUP }o--o{ PERMISSION : grants
+    USER }o--o{ PERMISSION : direct_grants
+    USER ||--o| MEMBER_ACCOUNT : authenticates
+    MEMBER ||--o| MEMBER_ACCOUNT : binds
+    USER ||--o| CREDENTIAL_STATE : tracks
+    MEMBER ||--o| MEMBER_PHONE_IDENTITY : owns
+    COURSE_TYPE ||--o{ PACKAGE : offers
+    COURSE_TYPE ||--o| QUICK_PACKAGE : maps
+    PACKAGE ||--o| QUICK_PACKAGE : template
+    MEMBER ||--o{ PURCHASE : buys
+    PACKAGE ||--o{ PURCHASE : sold_as
+    COURSE_TYPE ||--o{ PURCHASE : credited_to
+    USER ||--o{ PURCHASE : records
+    MEMBER ||--o{ QUICK_ORDER : placed_for
+    PACKAGE ||--o{ QUICK_ORDER : priced_from
+    USER ||--o{ QUICK_ORDER : processes
+    PURCHASE |o--o| QUICK_ORDER : fulfills
+    COURSE_TYPE ||--o{ AVAILABLE_SLOT : defines
+    COACH ||--o{ AVAILABLE_SLOT : hosts
+    AVAILABLE_SLOT |o--o{ BOOKING : optional_slot
+    MEMBER ||--o{ BOOKING : attends
+    COACH ||--o{ BOOKING : teaches
+    COURSE_TYPE ||--o{ BOOKING : describes
+    USER ||--o{ BOOKING : creates
+    BOOKING |o--o| BOOKING : predecessor
+    BOOKING |o--o{ BOOKING : makeup_origin
+    MEMBER ||--o{ LESSON_ENTRY : owns
+    COURSE_TYPE ||--o{ LESSON_ENTRY : tracks
+    PURCHASE |o--o| LESSON_ENTRY : credits
+    BOOKING |o--o{ LESSON_ENTRY : books_or_reverses
+    LESSON_ENTRY |o--o| LESSON_ENTRY : reverses
+    LESSON_ADJUSTMENT |o--o| LESSON_ENTRY : adjusts
+    USER ||--o{ LESSON_ENTRY : posts
+    MEMBER ||--o{ LESSON_ADJUSTMENT : receives
+    COURSE_TYPE ||--o{ LESSON_ADJUSTMENT : applies_to
+    USER ||--o{ LESSON_ADJUSTMENT : records
+    BOOKING ||--o{ BOOKING_EVENT : has
+    USER ||--o{ BOOKING_EVENT : performs
+    USER ||--o{ MEMBER_RULE_CONFIRMATION : confirms
+    MEMBER ||--o{ MEMBER_RULE_CONFIRMATION : acknowledges
+    BOOKING ||--o{ MEMBER_RULE_CONFIRMATION : applies_to
+    BOOKING |o--o{ MEMBER_RULE_CONFIRMATION : produces
+    MEMBER ||--o{ MEMBER_ARCHIVE_EVENT : has
+    USER |o--o{ MEMBER_ARCHIVE_EVENT : account_snapshot
+    USER ||--o{ MEMBER_ARCHIVE_EVENT : records
+    USER ||--o{ ADMIN_LOG_ENTRY : performs
+
+    USER {
+        int id PK
+        string username UK
+        boolean is_staff
+        boolean is_superuser
+        boolean is_active
+    }
+    GROUP {
+        int id PK
+        string name UK
+    }
+    PERMISSION {
+        int id PK
+        string codename
+        int content_type_id FK
+    }
+    MEMBER {
+        int id PK
+        string name
+        string phone
+        string status
+        date joined_on
+    }
+    MEMBER_ACCOUNT {
+        int id PK
+        int user_id FK, UK
+        int member_id FK, UK
+    }
+    COACH {
+        int id PK
+        string name
+        string specialty
+        string status
+    }
+    COURSE_TYPE {
+        int id PK
+        string name
+        int duration_minutes
+        int credits_cost
+        boolean active
+    }
+    PACKAGE {
+        int id PK
+        int course_type_id FK
+        string name
+        int credits
+        decimal price
+        boolean active
+    }
+    PURCHASE {
+        int id PK
+        int member_id FK
+        int package_id FK
+        int course_type_id FK
+        int created_by_id FK
+        uuid request_id UK
+        string package_name
+        int credits
+        decimal amount
+        date purchased_on
+    }
+    BOOKING {
+        int id PK
+        int member_id FK
+        int coach_id FK
+        int course_type_id FK
+        int slot_id FK
+        int previous_booking_id FK, UK
+        int makeup_origin_id FK
+        int created_by_id FK
+        uuid request_id UK
+        datetime starts_at
+        datetime ends_at
+        int credits_cost
+        string status
+        string replacement_type
+    }
+    LESSON_ENTRY {
+        int id PK
+        int member_id FK
+        int course_type_id FK
+        int purchase_id FK, UK
+        int booking_id FK
+        int adjustment_id FK, UK
+        int reverses_id FK, UK
+        int created_by_id FK
+        string kind
+        int delta
+        int balance_before
+        int balance_after
+    }
+    LESSON_ADJUSTMENT {
+        int id PK
+        int member_id FK
+        int course_type_id FK
+        int created_by_id FK
+        uuid request_id UK
+        int delta
+        datetime occurred_at
+    }
+    AVAILABLE_SLOT {
+        int id PK
+        int course_type_id FK
+        int coach_id FK
+        datetime starts_at
+        int duration_minutes
+        boolean active
+    }
+    QUICK_ORDER {
+        int id PK
+        int actor_id FK
+        int member_id FK
+        int package_id FK
+        int purchase_id FK, UK
+        uuid request_id UK
+        string fingerprint
+        string mode
+    }
+    QUICK_PACKAGE {
+        int id PK
+        int course_type_id FK, UK
+        int package_id FK, UK
+    }
+    MEMBER_PHONE_IDENTITY {
+        int id PK
+        int member_id FK, UK
+        string phone UK
+    }
+    CREDENTIAL_STATE {
+        int id PK
+        int user_id FK, UK
+        boolean required_change
+    }
+    BOOKING_EVENT {
+        int id PK
+        int booking_id FK
+        int created_by_id FK
+        string action
+        string reason
+        json details
+    }
+    MEMBER_RULE_CONFIRMATION {
+        int id PK
+        int user_id FK
+        int member_id FK
+        int booking_id FK
+        int result_booking_id FK
+        uuid request_id UK
+        string rule_version
+    }
+    MEMBER_ARCHIVE_EVENT {
+        int id PK
+        int member_id FK
+        int created_by_id FK
+        int account_user_id FK
+        string action
+        string previous_status
+    }
+    ADMIN_LOG_ENTRY {
+        int id PK
+        int user_id FK
+        int content_type_id FK
+        string object_id
+        string change_message
+    }

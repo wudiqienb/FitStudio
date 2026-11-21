@@ -1,0 +1,4 @@
+{% if can_archive_member %}
+{% if member.status == 'archived' %}<a class="btn btn-outline-primary" href="{% url 'studio:archived_member_detail' member.pk %}">归档历史 / 恢复</a>
+{% else %}<a class="btn btn-link text-danger" href="{% url 'studio:member_archive' member.pk %}">归档会员</a>{% endif %}
+{% endif %}

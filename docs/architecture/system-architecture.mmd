@@ -1,0 +1,12 @@
+flowchart LR
+    U["Member · coach · administrator"] -->|HTTPS| C["Caddy reverse proxy"]
+    C -->|HTTP on Compose network| G["Gunicorn WSGI"]
+    G --> D["Django middleware and views"]
+    D -->|HTML forms and templates| U
+    D -->|Static URL handling| W["WhiteNoise"]
+    W --> F["Built static files"]
+    D --> S["Permissions and business services"]
+    S -->|Django ORM · SQLite IMMEDIATE| DB[("SQLite in studio_data")]
+    H["Web readiness probe"] -->|Loopback HTTP| Z["GET /healthz/"]
+    D --> Z
+    Z -->|Read migration table| DB

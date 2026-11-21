@@ -1,0 +1,14 @@
+{% extends "studio/base.html" %}
+{% block title %}删除会员{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'studio:members' %}">← 返回会员</a>
+<section class="page-heading"><p class="eyebrow">核对后再操作</p><h1>删除这份档案？</h1></section>
+<div class="card profile-form"><div class="card-body"><h2>{{ object.name }}</h2><p>{{ object.phone|default:"未填写联系电话" }}</p>
+<p class="text-secondary">删除后无法在页面中恢复。如果只是暂时不来上课，可以将会员状态改为停用。</p>
+<form method="post" novalidate>{% csrf_token %}
+  <div class="form-check confirm-check">{{ form.confirm }}<label class="form-check-label" for="{{ form.confirm.id_for_label }}">{{ form.confirm.label }}</label></div>
+  {{ form.non_field_errors }}
+  {% if form.confirm.errors %}<div class="field-errors" role="alert">请先勾选确认，再提交。</div>{% endif %}
+  <div class="form-actions"><button class="btn btn-danger" type="submit">确认删除</button><a class="btn btn-outline-secondary" href="{% url 'studio:members' %}">保留档案</a></div>
+</form></div></div>
+{% endblock %}

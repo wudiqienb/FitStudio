@@ -1,0 +1,27 @@
+{% extends "studio/base.html" %}
+{% block title %}首页{% endblock %}
+{% block content %}
+<section class="page-heading"><p class="eyebrow">{% now "n月j日 · l" %}</p><h1>今天，从容安排。</h1><p class="text-secondary mb-0">课程安排、待办与会员，就在手边。</p></section>
+<section class="hero-panel mb-4" aria-labelledby="quick-title">
+  <div class="hero-label">工作室 · 常用操作</div><h2 id="quick-title">把时间留给训练</h2>
+  <p>先记好每一位会员，让日常管理更轻松。</p>
+  <div class="d-grid gap-2 d-sm-flex">
+    {% if perms.studio.quick_open_member %}<a class="btn btn-accent" href="{% url 'studio:quick_open' %}">快速新增会员</a>{% endif %}
+    {% if perms.studio.quick_renew_member %}<a class="btn btn-outline-light" href="{% url 'studio:quick_renew' %}">老会员续课</a>{% endif %}
+    {% if perms.studio.add_member %}<a class="btn btn-accent" href="{% url 'studio:member_add' %}">＋ 新增会员</a>{% endif %}
+    {% if perms.studio.view_member %}<a class="btn btn-outline-light" href="{% url 'studio:members' %}">查看会员</a>{% endif %}
+    {% if perms.studio.add_booking %}<a class="btn btn-outline-light" href="{% url 'studio:booking_add' %}">创建预约</a>{% endif %}
+  </div>
+</section>
+<div class="row g-3">
+  <section class="col-12 col-lg-7" aria-labelledby="today-title"><div class="card h-100"><div class="card-body">
+    <div class="section-heading mb-3"><h2 id="today-title">今日课程</h2>{% if perms.studio.view_booking %}<a class="back-link" href="{% url 'studio:courses' %}">查看日程</a>{% endif %}</div>
+    {% if perms.studio.view_booking %}{% for booking in today_bookings %}{% include "studio/booking_card.html" %}{% empty %}<div class="empty-state"><h3>今天还没有课程</h3><p>创建预约后，课程将出现在这里。</p></div>{% endfor %}{% else %}<p>请联系管理员开通课程查看权限。</p>{% endif %}
+  </div></div></section>
+  <section class="col-12 col-lg-5" aria-labelledby="pending-title"><div class="card h-100"><div class="card-body">
+    <div class="section-heading mb-3"><h2 id="pending-title">待处理预约</h2><span class="status-pill">待上课</span></div>
+    {% if perms.studio.view_booking %}{% for booking in pending_bookings %}{% include "studio/booking_card.html" %}{% empty %}<p class="text-secondary">目前没有待上课预约。</p>{% endfor %}{% else %}<p>请联系管理员开通课程查看权限。</p>{% endif %}
+  </div></div></section>
+</div>
+{% if perms.studio.view_booking %}<section class="mt-4"><h2>待安排补课</h2>{% for booking in makeup_due %}{% include "studio/booking_card.html" %}{% empty %}<p class="text-secondary">目前没有待安排的补课。</p>{% endfor %}</section>{% endif %}
+{% endblock %}

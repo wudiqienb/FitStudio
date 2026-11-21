@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'studio/vendor/bootstrap-grid.min.css' %}">
+{% endblock %}
+
+{% block responsive %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'studio/admin.css' %}">
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src="{% static 'studio/admin.js' %}" defer></script>
+{% endblock %}
+
+{% block nav-global %}
+{% if user.is_active and user.is_staff %}
+<nav class="fitstudio-nav container-fluid" aria-label="档案快捷导航">
+  <div class="row g-2">
+    {% if perms.studio.view_member or perms.studio.change_member %}
+    <div class="col-12 col-sm-6"><a href="{% url 'admin:studio_member_changelist' %}">会员档案</a></div>
+    {% endif %}
+    {% if perms.studio.view_coach or perms.studio.change_coach %}
+    <div class="col-12 col-sm-6"><a href="{% url 'admin:studio_coach_changelist' %}">教练档案</a></div>
+    {% endif %}
+  </div>
+</nav>
+{% endif %}
+{% endblock %}

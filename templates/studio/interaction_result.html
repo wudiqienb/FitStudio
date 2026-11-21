@@ -1,0 +1,6 @@
+<section class="card mb-3 fi-card-update" aria-label="操作后状态"><div class="card-body">
+{% if booking %}<h2>{{ booking.member }} · {{ booking.course_name }}</h2><p><span class="status-pill booking-{{ booking.status }}">{{ booking.get_status_display }}</span></p><p>{{ booking.coach }} · {{ booking.starts_at|date:"Y.m.d H:i" }}</p>{% if booking.status == 'coach_cancelled' %}<p>{% if booking.replacement %}补课已安排{% else %}待安排补课{% endif %} · 本次教练取消不扣课</p>{% endif %}{% if booking.makeup_origin_id %}<p>补课已关联原预约 #{{ booking.makeup_origin_id }}</p>{% endif %}{% endif %}
+<p>当前实际余额 <strong data-fi-balance>{{ account.balance }}</strong> 节 · 可用课时 <strong data-fi-available>{{ account.available }}</strong> 节</p>
+{% if ledger %}<p>本次流水余额：{{ ledger.before }} → {{ ledger.after }} 节（变动 {{ ledger.delta }}）</p>{% endif %}
+<a class="btn btn-outline-primary" href="{{ destination }}">查看最新详情与后续操作</a>
+</div></section>

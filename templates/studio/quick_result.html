@@ -1,0 +1,46 @@
+{% extends "studio/quick_base.html" %}{% block content %}<h1>{% if reset %}凭据已重置{% else %}购课已完成{% endif %}</h1>
+{% if order %}<p>会员：{{ order.member.name }} · {{ order.member.phone }}</p><p>私教课 · {{ order.purchase.credits }}课时 · 实收 ¥{{ order.purchase.amount }}</p><p>业务编号：{{ order.request_id }}</p>{% endif %}
+{% if password %}<section id="credentials"><h2>登录凭据（仅本次显示）</h2>
+<p>账号：<code id="credential-username">{{ username }}</code> <button class="btn btn-outline-primary btn-sm m-1" type="button" data-copy="username">复制账号</button></p>
+<p>临时密码：<code id="credential-password">{{ password }}</code> <button class="btn btn-outline-primary btn-sm m-1" type="button" data-copy="password">复制密码</button></p>
+<p><button class="btn btn-outline-primary btn-sm m-1" type="button" data-copy="all">复制完整登录信息</button></p>
+<p>会员首次登录后必须设置自己的密码。请私下交付给会员；遗失后由有权限的管理员核对身份并重置，重复提交不会再次显示或更改密码。</p>
+<p>会员登录入口：<a id="credential-login" href="{% url 'studio:portal_login' %}">{% url 'studio:portal_login' %}</a></p>
+<p id="copy-status" role="status" aria-live="polite"></p>
+<div id="manual-copy" hidden><label for="manual-credential">请长按或选中后复制：</label><textarea id="manual-credential" readonly rows="6" style="width:100%;font-size:16px"></textarea></div>
+</section>
+<script>
+(function () {
+  var section = document.getElementById('credentials');
+  var status = document.getElementById('copy-status');
+  var manual = document.getElementById('manual-copy');
+  var area = document.getElementById('manual-credential');
+  function fallback(value) {
+    manual.hidden = false;
+    area.value = value;
+    area.focus(); area.select(); area.setSelectionRange(0, value.length);
+    var copied = false;
+    try { copied = document.execCommand('copy'); } catch (error) {}
+    if (copied) { manual.hidden = true; area.value = ''; }
+    status.textContent = copied ? '已复制，请私下交付给会员。' : '自动复制不可用，请在下方长按或选中后复制。';
+  }
+  section.querySelectorAll('[data-copy]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var username = document.getElementById('credential-username').textContent;
+      var password = document.getElementById('credential-password').textContent;
+      var value = button.dataset.copy === 'username' ? username : button.dataset.copy === 'password' ? password :
+        '会员登录入口：' + document.getElementById('credential-login').href + '\n账号：' + username + '\n临时密码：' + password + '\n首次登录后请先修改密码。';
+      if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(function () {
+          status.textContent = '已复制，请私下交付给会员。'; manual.hidden = true; area.value = '';
+        }, function () { fallback(value); });
+      } else { fallback(value); }
+    });
+  });
+  window.addEventListener('pagehide', function () { section.replaceChildren(); });
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) { section.textContent = '凭据仅本次显示，已隐藏。遗失后请核对身份并重置。'; }
+  });
+}());
+</script>
+{% else %}<p>请求已处理。重复提交不会重复购课或改变账号。</p>{% endif %}{% endblock %}

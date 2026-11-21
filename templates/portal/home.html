@@ -1,0 +1,20 @@
+{% extends 'portal/base.html' %}
+{% block content %}
+<section class="intro">
+  <p class="eyebrow">YOUR PERSONAL SPACE</p>
+  <p class="welcome-label">欢迎回来</p>
+  <h1 class="member-name">{{ member.name }}<span class="accent">。</span></h1>
+  <p class="intro-copy">很高兴与你一起，保持热爱与活力。</p>
+</section>
+<section class="portal-card member-card" aria-labelledby="member-title">
+  <div class="card-heading"><span class="section-number" aria-hidden="true">01 /</span><h2 id="member-title">会员中心</h2></div>
+  <div class="identity-badge"><span aria-hidden="true">●</span> FitStudio 会员</div>
+  <p class="member-message">这里是属于你的专属空间。<br>让运动成为日常，让状态越来越好。</p>
+</section>
+<nav class="portal-links" aria-label="会员功能"><a href="{% url 'studio:portal_reserve' %}">预约课程 →</a><a href="{% url 'studio:portal_bookings' %}">我的预约 →</a></nav>
+<section class="portal-card section-card"><h2>课时账户</h2><p class="account-note">预约会占用课时，上课完成后才扣除。</p>
+{% for account in accounts %}<div class="portal-row"><span>{{ account.course.name }}</span></div>{% include 'portal/credits.html' %}{% empty %}<p class="account-note">暂无课程课时。</p>{% endfor %}</section>
+<section class="portal-card section-card"><h2>即将开始</h2>{% for booking in upcoming %}<a class="portal-row" href="{% url 'studio:portal_booking_detail' booking.pk %}"><span>{{ booking.course_name }} · {{ booking.coach.name }}<br><small>{{ booking.starts_at|date:'m月d日 H:i' }}</small></span><span>查看 →</span></a>{% empty %}<div class="fi-empty"><p>暂无即将开始的课程。</p><a class="back-link" href="{% url 'studio:portal_reserve' %}">去预约课程 →</a></div>{% endfor %}</section>
+<section class="portal-card section-card"><h2>预约概览</h2><div class="booking-stats">{% for stat in booking_stats %}<div><span class="session-status status-{{ stat.status }}">{{ stat.label }}</span><strong>{{ stat.count }}</strong></div>{% endfor %}</div></section>
+<form class="logout-form" method="post" action="{% url 'studio:portal_logout' %}">{% csrf_token %}<button class="text-button" type="submit">退出登录 <span aria-hidden="true">↗</span></button></form>
+{% endblock %}

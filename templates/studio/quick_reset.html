@@ -1,0 +1,1 @@
+{% extends "studio/quick_base.html" %}{% block content %}<h1>管理员重置会员凭据</h1><p>{{ member.name }} · {{ member.phone }}</p><p>核对会员身份后操作。原密码立即失效，不改变账号绑定或课时。</p><p>{{ error }}</p><form method="post">{% csrf_token %}<label><input type="checkbox" name="confirm" value="yes" required>已核对身份，确认重置</label><button>确认重置</button></form>{% endblock %}

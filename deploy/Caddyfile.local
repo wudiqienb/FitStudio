@@ -1,0 +1,13 @@
+{
+    admin off
+    skip_install_trust
+    auto_https disable_redirects
+    log {
+        exclude http.log.access http.log.error
+    }
+}
+
+{$FITSTUDIO_DOMAIN}:443 {
+    tls internal
+    reverse_proxy web:8000
+}

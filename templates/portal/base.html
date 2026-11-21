@@ -1,0 +1,27 @@
+{% load static %}<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>{% block title %}会员中心{% endblock %} · FitStudio</title>
+  <link rel="stylesheet" href="{% static 'studio/portal.css' %}">
+  <link rel="stylesheet" href="{% static 'studio/interaction.css' %}">
+  <script src="{% static 'studio/interaction.js' %}" defer></script>
+  <script src="{% static 'studio/portal-interaction.js' %}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <div class="portal-shell">
+    <header class="portal-header">
+      <a class="brand" href="{% url 'studio:portal_home' %}" aria-label="FitStudio 会员中心"><span class="brand-mark" aria-hidden="true">F</span>FitStudio<span class="brand-dot" aria-hidden="true">.</span></a>
+      <span class="header-label">会员专属</span>
+    </header>
+    <main id="main-content">
+      {% include 'shared/feedback.html' %}
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="portal-footer">每一次坚持，都在成为更好的自己。</footer>
+  </div>
+</body>
+</html>

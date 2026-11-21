@@ -1,0 +1,1 @@
+{% if action == 'reschedule' %}<p class="portal-notice fi-card-update">原预约已改期，以下为新预约时间。</p>{% endif %}{% include 'portal/session_card.html' %}<section class="portal-card section-card fi-card-update"><h2>最新课时</h2>{% include 'portal/credits.html' %}</section><a class="back-link" href="{% url 'studio:portal_bookings' %}">查看我的预约与历史 →</a>

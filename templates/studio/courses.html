@@ -1,0 +1,10 @@
+{% extends "studio/base.html" %}
+{% block title %}课程{% endblock %}
+{% block content %}<section class="page-heading"><p class="eyebrow">COURSES · 课程日程</p><h1>把每节训练安排好。</h1><p class="text-secondary">预约时占用额度，课程完成后再扣课。</p></section>
+<div class="d-flex flex-wrap gap-2 mb-3">{% if perms.studio.add_booking %}<a class="btn btn-primary" href="{% url 'studio:booking_add' %}">＋ 创建预约</a>{% endif %}{% if perms.studio.view_coursetype %}<a class="btn btn-outline-primary" href="{% url 'studio:catalog' %}">课程与套餐</a>{% endif %}</div>
+{% if perms.studio.backfill_booking %}<a class="btn btn-outline-primary mb-3" href="{% url 'studio:booking_backfill' %}">补录历史课程</a>{% endif %}
+<form class="card mb-4" method="get"><div class="card-body"><label for="course-date" class="form-label">查看日期</label><div class="date-filter"><input class="form-control" id="course-date" name="date" type="date" value="{{ selected_day|date:'Y-m-d' }}"><button class="btn btn-primary" type="submit">查看</button></div></div></form>
+{% if date_error %}<div class="alert alert-warning" role="alert">{{ date_error }}</div>{% endif %}
+<p>{% if history %}<a href="?date={{ selected_day|date:'Y-m-d' }}">只看有效课程</a>{% else %}<a href="?date={{ selected_day|date:'Y-m-d' }}&amp;history=1">查看历史状态</a>{% endif %}</p>
+{% for booking in bookings %}{% include "studio/booking_card.html" %}{% empty %}<div class="card empty-state"><h2>这一天还没有课程</h2><p>可以选择其他日期，或创建一条预约。</p></div>{% endfor %}
+{% endblock %}

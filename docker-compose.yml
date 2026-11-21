@@ -1,0 +1,49 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    environment:
+      DJANGO_SETTINGS_MODULE: config.production_settings
+      FITSTUDIO_DOMAIN: ${FITSTUDIO_DOMAIN:-fitstudio.localhost}
+      FITSTUDIO_HTTPS_PORT: ${FITSTUDIO_HTTPS_PORT:-8443}
+      FITSTUDIO_SECRET_KEY: ${FITSTUDIO_SECRET_KEY:?Generate an instance secret in the selected env file}
+      FITSTUDIO_DB_PATH: /data/fitstudio.sqlite3
+      FITSTUDIO_QUICK_COURSE_TYPE_ID: ${FITSTUDIO_QUICK_COURSE_TYPE_ID:-}
+      FITSTUDIO_BOOKING_MAX_DAYS: ${FITSTUDIO_BOOKING_MAX_DAYS:-}
+      FITSTUDIO_BOOKING_COACH_ID: ${FITSTUDIO_BOOKING_COACH_ID:-}
+      FITSTUDIO_BOOKING_COURSE_TYPE_ID: ${FITSTUDIO_BOOKING_COURSE_TYPE_ID:-}
+    volumes:
+      - studio_data:/data
+    networks: [internal]
+    healthcheck:
+      test: ["CMD", "python", "-m", "config.check_health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 45s
+    logging:
+      options: {max-size: "10m", max-file: "3"}
+  proxy:
+    image: caddy:2.11.9
+    environment:
+      FITSTUDIO_DOMAIN: ${FITSTUDIO_DOMAIN:-fitstudio.localhost}
+    restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_healthy
+    ports:
+      - "${FITSTUDIO_HTTP_BIND:-127.0.0.1:8080}:80"
+      - "${FITSTUDIO_HTTPS_BIND:-127.0.0.1:8443}:443"
+    volumes:
+      - ${FITSTUDIO_CADDYFILE:-./deploy/Caddyfile.local}:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [internal]
+    logging:
+      options: {max-size: "10m", max-file: "3"}
+networks:
+  internal:
+volumes:
+  studio_data:
+  caddy_data:
+  caddy_config:

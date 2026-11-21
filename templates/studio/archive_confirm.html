@@ -1,0 +1,11 @@
+{% extends "studio/base.html" %}
+{% block title %}{% if restore %}恢复{% else %}归档{% endif %}会员{% endblock %}
+{% block content %}
+<h1>{% if restore %}恢复{% else %}归档{% endif %}会员</h1>
+{% include 'studio/archive_summary.html' %}
+{% if restore %}<p>恢复后会员状态变为正常。原账号仅恢复归档前的启用状态，保留原账号、密码、课时及全部历史。</p>
+{% else %}<p>归档后会员账号停用，保留原账号绑定、购课、课时流水及预约历史，不会自动取消预约。</p>{% endif %}
+<form method="post" class="card card-body">{% csrf_token %}{{ form.as_p }}
+<button class="btn btn-primary" type="submit">确认{% if restore %}恢复{% else %}归档{% endif %}</button>
+<a class="btn btn-link" href="{% url 'studio:members' %}">返回会员列表</a></form>
+{% endblock %}

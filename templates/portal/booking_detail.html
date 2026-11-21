@@ -1,0 +1,4 @@
+{% extends 'portal/base.html' %}{% block title %}预约详情{% endblock %}{% block content %}
+<p class="eyebrow">SESSION DETAILS</p><h1>预约详情<span class="accent">。</span></h1>
+{% include 'portal/session_card.html' %}<section class="portal-card section-card"><h2>课时明细</h2>{% include 'portal/credits.html' %}</section>
+<a class="back-link" href="{% url 'studio:portal_bookings' %}">← 返回我的预约</a>{% endblock %}

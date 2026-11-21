@@ -1,0 +1,19 @@
+{% extends "studio/base.html" %}{% block title %}预约详情{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'studio:courses' %}?date={{ object.starts_at|date:'Y-m-d' }}">← 返回课程日程</a>
+<section class="page-heading"><p class="eyebrow">BOOKING · 预约详情</p><h1>{{ object.course_name }}</h1><span class="status-pill booking-{{ object.status }}">{{ object.get_status_display }}</span></section>
+<div class="card mb-3"><div class="card-body"><h2>{{ object.member }}</h2><p>教练 {{ object.coach }}</p><p>{{ object.starts_at|date:"Y.m.d H:i" }} — {{ object.ends_at|date:"Y.m.d H:i" }}</p><p>本次消耗 {{ object.credits_cost }} 课时</p>
+<div class="d-grid gap-2 d-md-flex flex-wrap">
+{% if object.status == 'pending' %}
+{% if perms.studio.complete_booking %}<a class="btn btn-primary" href="{% url 'studio:booking_action' object.pk 'complete' %}">确认完成并扣课</a>{% endif %}
+{% if perms.studio.change_booking %}<a class="btn btn-outline-primary" href="{% url 'studio:booking_reschedule' object.pk %}">改期</a><a class="btn btn-outline-secondary" href="{% url 'studio:booking_action' object.pk 'cancel' %}">取消预约</a>{% endif %}
+{% if perms.studio.no_show_booking %}<a class="btn btn-outline-secondary" href="{% url 'studio:booking_action' object.pk 'no-show' %}">登记爽约</a>{% endif %}
+{% if perms.studio.coach_cancel_booking %}<a class="btn btn-outline-secondary" href="{% url 'studio:booking_action' object.pk 'coach-cancel' %}">教练取消</a>{% endif %}
+{% elif object.status == 'completed' or object.status == 'late_cancelled' or object.status == 'no_show' %}{% if perms.studio.restore_booking %}<a class="btn btn-outline-secondary" href="{% url 'studio:booking_action' object.pk 'restore' %}">误扣冲正恢复</a>{% endif %}{% endif %}
+{% if perms.studio.makeup_booking and not object.replacement %}{% if object.status == 'coach_cancelled' or object.status == 'cancelled' and object.makeup_origin_id %}<a class="btn btn-primary" href="{% url 'studio:booking_makeup' object.pk %}">安排补课</a>{% endif %}{% endif %}
+{% if object.previous_booking_id %}<a class="btn btn-outline-primary" href="{% url 'studio:booking_detail' object.previous_booking_id %}">查看原预约</a>{% endif %}
+{% if object.replacement %}<a class="btn btn-outline-primary" href="{% url 'studio:booking_detail' object.replacement.pk %}">查看后续预约</a>{% endif %}
+{% if perms.studio.view_lessonentry %}<a class="btn btn-outline-primary" href="{% url 'studio:member_lessons' object.member_id %}">会员课时与流水</a>{% endif %}
+</div></div></div>
+<h2>操作记录</h2>{% for event in events %}<article class="card mb-2"><div class="card-body"><p class="mb-1"><strong>{{ event.reason }}</strong></p><small>业务时间：{% if event.occurred_at %}{{ event.occurred_at|date:"Y.m.d H:i:s" }}{% else %}历史记录未登记{% endif %} · 记录时间：{{ event.created_at|date:"Y.m.d H:i:s" }} · {{ event.created_by }}</small>{% if event.details.before.starts_at %}<p class="record-time">原时间 {{ event.details.before.starts_at }} → {{ event.details.after.starts_at }}</p>{% endif %}</div></article>{% empty %}<p>暂无操作记录。</p>{% endfor %}
+{% endblock %}

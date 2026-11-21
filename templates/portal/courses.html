@@ -1,0 +1,4 @@
+{% extends 'portal/base.html' %}{% block title %}预约课程{% endblock %}{% block content %}
+<p class="eyebrow">FIND YOUR TIME</p><h1>预约课程<span class="accent">。</span></h1><p class="intro-copy">选择教练已开放的时段，每次占用1课时。</p>
+{% for item in items %}<article class="portal-card section-card"><h2>{{ item.slot.course_type.name }}</h2><p>{{ item.slot.coach.name }} · {{ item.slot.starts_at|date:'Y年m月d日 H:i' }}</p><p class="account-note">时长 {{ item.slot.duration_minutes }} 分钟 · {% if item.available %}可预约{% else %}已满{% endif %}</p>{% if item.available %}<a class="primary-button booking-confirm-link" href="{% url 'studio:portal_booking_confirmation' item.slot.pk %}">预约这个时段 <span>↗</span></a>{% endif %}</article>{% empty %}<div class="portal-card section-card">暂时没有开放的预约时段。</div>{% endfor %}
+<a class="back-link" href="{% url 'studio:portal_home' %}">← 返回首页</a>{% endblock %}

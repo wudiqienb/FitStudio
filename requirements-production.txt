@@ -1,0 +1,4 @@
+-r requirements.txt
+gunicorn==27.0.1
+packaging==26.3
+whitenoise==6.9.0

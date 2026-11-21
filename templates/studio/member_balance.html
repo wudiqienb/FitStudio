@@ -1,0 +1,1 @@
+{% extends "studio/base.html" %}{% block content %}<a href="{% url 'studio:members' %}">返回会员</a><h1>{{ member.name }} · 课时余额</h1><p>{{ member.phone }}</p>{% for account in accounts %}<section class="card p-3 mb-3"><h2>{{ account.course.name }}</h2><p>账面余额：{{ account.balance }} · 可用余额：{{ account.available }}</p></section>{% empty %}<p>暂无课程。</p>{% endfor %}{% endblock %}

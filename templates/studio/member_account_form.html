@@ -1,0 +1,12 @@
+{% extends "studio/base.html" %}
+{% block title %}开通会员账号{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'studio:members' %}">← 返回会员</a>
+<section class="page-heading"><h1>开通会员账号</h1><p>{{ member.name }} · {{ member.phone|default:"未填写联系电话" }}</p><p class="text-secondary">仅创建普通会员登录账号，自动绑定当前会员。请核对姓名后保存。</p></section>
+<form method="post" class="card profile-form">{% csrf_token %}<div class="card-body">
+{{ form.non_field_errors }}
+{% for field in form %}<div class="mb-3"><label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}{% for error in field.errors %}<div class="field-errors" role="alert">{{ error }}</div>{% endfor %}</div>{% endfor %}
+<p class="text-secondary">密码不会在保存后显示。请通过私下渠道告知会员，并提示其使用会员登录入口。</p>
+<div class="form-actions"><button type="submit" class="btn btn-primary">开通会员账号</button><a class="btn btn-outline-secondary" href="{% url 'studio:members' %}">取消</a></div>
+</div></form>
+{% endblock %}

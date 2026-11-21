@@ -1,0 +1,20 @@
+{% extends "studio/base.html" %}{% block title %}会员课时{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'studio:members' %}">← 返回会员</a><section class="page-heading"><p class="eyebrow">LESSONS · 课时账户</p><h1>{{ object.name }}</h1><p class="text-secondary">余额由课时流水计算，待上课预约占用可用额度。</p></section>
+{% if perms.studio.add_purchase %}<a class="btn btn-primary mb-4" href="{% url 'studio:purchase_add' %}?member={{ object.pk }}">＋ 登记购课</a>{% endif %}
+{% if perms.studio.add_lessonadjustment %}<a class="btn btn-outline-primary mb-4" href="{% url 'studio:adjustment_add' %}?member={{ object.pk }}">课时调整</a>{% endif %}
+<div class="row g-3 mb-4">{% for account in accounts %}<section class="col-12 col-md-6"><div class="card"><div class="card-body"><h2>{{ account.course.name }}</h2><div class="credit-numbers"><div><strong>{{ account.balance }}</strong><span>余额课时</span></div><div><strong>{{ account.available }}</strong><span>可用课时</span></div></div></div></div></section>{% empty %}<p>请先建立课程类型。</p>{% endfor %}</div>
+<h2>课时流水</h2><form method="get" class="mb-3"><label for="kind" class="form-label">操作类型</label><select id="kind" name="kind" class="form-select"><option value="">全部</option>{% for value,label in kinds %}<option value="{{ value }}" {% if value == selected_kind %}selected{% endif %}>{{ label }}</option>{% endfor %}</select><button class="btn btn-outline-primary mt-2">查询</button></form>
+{% for entry in entries %}
+<article class="card mb-2"><div class="card-body">
+  <div class="section-heading"><h3 class="mb-0">{{ entry.get_kind_display }}</h3><strong>{% if entry.delta > 0 %}+{% endif %}{{ entry.delta }}课时</strong></div>
+  <p class="mt-2 mb-1">{{ entry.course_type }} · {{ entry.balance_before }} → {{ entry.balance_after }}</p>
+  <p class="mb-1">{{ entry.reason }}</p>
+  {% if entry.purchase and perms.studio.view_purchase %}<p class="text-secondary">{{ entry.purchase.package_name }} · 购买 {{ entry.purchase.purchased_on|date:"Y.m.d" }} · 登记金额 ¥{{ entry.purchase.amount }}</p>{% endif %}
+  <small>业务时间：{% if entry.occurred_at %}{{ entry.occurred_at|date:"Y.m.d H:i:s" }}{% else %}历史记录未登记{% endif %} · 记录时间：{{ entry.created_at|date:"Y.m.d H:i:s" }} · {{ entry.created_by }} · 流水 #{{ entry.pk }}</small>
+  {% if entry.booking_id %}<div><a class="back-link" href="{% url 'studio:booking_detail' entry.booking_id %}">查看关联预约</a></div>{% endif %}
+  {% if entry.reverses_id %}<p class="mb-0 text-secondary">原扣课流水 #{{ entry.reverses_id }}</p>{% endif %}
+</div></article>
+{% empty %}<div class="card empty-state"><p>还没有课时流水，购课登记后会显示在这里。</p></div>{% endfor %}
+<nav class="pagination-bar" aria-label="流水分页">{% if entries.has_previous %}<a class="btn btn-outline-primary" href="?kind={{ selected_kind|urlencode }}&amp;page={{ entries.previous_page_number }}">上一页</a>{% endif %}<span>第 {{ entries.number }} / {{ entries.paginator.num_pages }} 页</span>{% if entries.has_next %}<a class="btn btn-outline-primary" href="?kind={{ selected_kind|urlencode }}&amp;page={{ entries.next_page_number }}">下一页</a>{% endif %}</nav>
+{% endblock %}
